@@ -1,1 +1,1 @@
-# GumBuddy
+# GymBuddy
