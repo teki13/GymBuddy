@@ -385,12 +385,15 @@ def displayDailyStats():
 
 	global user
 
+	
 	while True:
 		os.system("clear")
 		print("Please enter your today's statistics:")
 		callories = input("Number of callories consumed: ")
 		water = input("Glasses of water consumed: ")
 		sleep = input("How many hours have you slept for tonight: ")
+
+
 
 		if callories.isdigit() and water.isdigit() and sleep.isdigit():
 
