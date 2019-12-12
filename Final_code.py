@@ -327,6 +327,15 @@ def displayBMI():
 		cursor.close()
 
 		print(f"Your last recorder BMI was {data['BMI']}.\n")
+
+		#display the results and the ideal BMI range
+		if(data['BMI']>= 18.5 and data['BMI'] <= 24.9):
+			print("Your BMI is in the ideal range!")
+		elif(data['BMI'] < 18.5):
+			print("You are underweight and below the ideal range. The ideal range is between 18.5 and 24.9")
+		else:
+			print("You are above the ideal range. The ideal range is between 18.5 and 24.9")
+
 		print("Options:")
 		print("1. Enter your measurements again")
 		print("2. Go back to the main menu")
@@ -339,6 +348,7 @@ def displayBMI():
 		elif choice == "2":
 			displayMenu()
 			break
+
 
 def calculateBMI():
 	global user
@@ -356,12 +366,21 @@ def calculateBMI():
 
 			conn = create_connection()
 			cursor = conn.cursor()
+
 			#Update the database by inserting the new calculated BMI
 			ins = '''UPDATE user SET BMI = %s WHERE email = %s'''
 			cursor.execute(ins,(BMI_calculated,user.email))
 
 			conn.commit()
 			cursor.close()
+
+			#display the results and the ideal BMI range
+			if(BMI_calculated>= 18.5 and BMI_calculated <= 24.9):
+				print("Your BMI is in the ideal range!")
+			elif(BMI_calculated < 18.5):
+				print("You are underweight and below the ideal range. The ideal range is between 18.5 and 24.9")
+			else:
+				print("You are above the ideal range. The ideal range is between 18.5 and 24.9")
 
 			user.weight = weight
 			user.height = height
@@ -471,8 +490,6 @@ def displayWorkouts(workoutType):
 
 #getData()
 displayStart()
-
-
 
 
 
