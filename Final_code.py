@@ -5,7 +5,8 @@ from datetime import datetime
 import random
 
 #Connect to the DB
-conn = pymysql.connect(host='localhost',
+def create_connection():
+	return pymysql.connect(host='localhost',
                        port = 8889,
                        user='root',
                        password='root',
@@ -116,6 +117,7 @@ def getData(email):
 	#GET ALL DATA FROM FROM DB
 	# workouts = [Workout("Push Day", "Easy", 300, 60, 3, [Excercise("Push ups", "Easy", "You should do 20 push ups."), Excercise("Chest press", "Medium", "You should do 10 repetitions on a chest press."), Excercise("Trademill", "Easy", "You should run for 10 minutes.")]), Workout("Pull Day", "Advanced", 420, 40, 2, [Excercise("Football", "Easy", "You should do football drills."), Excercise("Bench", "Beginner", "Work our on a bench for a while.")]), Workout("Heavy Day", "Hard", 500, 45, 2, [Excercise("Biceps curl", "Hard", "You should do 10 repetitions."), Excercise("Chest press", "Medium", "You should do 10 repetitions on a chest press.")])]
 	# user = User(a, b, c...)
+	conn = create_connection()
 	cursor = conn.cursor()
 
 	query = 'SELECT * FROM user WHERE email = %s'
@@ -200,6 +202,8 @@ def displayLogin():
 		print("Login", login)
 		print("Password", password)
 
+		conn = create_connection()
+
 		cursor = conn.cursor()
 
 		query = 'SELECT * FROM user WHERE email = %s and password = %s'
@@ -247,6 +251,8 @@ def displayRegister():
 		height = input("Height (in meters): ")
 		weight = input("Weight (in kilograms)")
 		BMI = 0
+
+		conn = create_connection()
 
 		#Query the database
 		cursor = conn.cursor()
@@ -310,6 +316,7 @@ def displayBMI():
 		os.system("clear")
 
 		global user
+		conn = create_connection()
 
 		cursor = conn.cursor()
 
@@ -347,6 +354,7 @@ def calculateBMI():
 
 			BMI_calculated = round(float(weight)/float(height)/float(height), 1)
 
+			conn = create_connection()
 			cursor = conn.cursor()
 			#Update the database by inserting the new calculated BMI
 			ins = '''UPDATE user SET BMI = %s WHERE email = %s'''
@@ -385,7 +393,6 @@ def displayDailyStats():
 
 	global user
 
-	
 	while True:
 		os.system("clear")
 		print("Please enter your today's statistics:")
@@ -393,9 +400,8 @@ def displayDailyStats():
 		water = input("Glasses of water consumed: ")
 		sleep = input("How many hours have you slept for tonight: ")
 
-
-
 		if callories.isdigit() and water.isdigit() and sleep.isdigit():
+			conn = create_connection()
 
 			now = datetime.now()
 			dt_string = now.strftime("%H:%M:%S/%d/%m/%Y/") # unique date_id 
@@ -465,6 +471,8 @@ def displayWorkouts(workoutType):
 
 #getData()
 displayStart()
+
+
 
 
 
