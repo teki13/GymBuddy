@@ -247,9 +247,9 @@ def displayRegister():
 		age = input("Age: ")
 		gender = input("Gender (Female or Male): ")
 		lifestyle = input("Lifestyle (Active, Moderately Active, Sedentary): ")
-		experience_level = input("Experience Level (Beginner, Intermediate, Advanced)")
+		experience_level = input("Experience Level (Beginner, Intermediate, Advanced): ")
 		height = input("Height (in meters): ")
-		weight = input("Weight (in kilograms)")
+		weight = input("Weight (in kilograms): ")
 		BMI = 0
 
 		conn = create_connection()
@@ -471,7 +471,6 @@ def displayWorkouts(workoutType):
 
 #getData()
 displayStart()
-
 
 
 
